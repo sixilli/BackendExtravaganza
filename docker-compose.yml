@@ -2,6 +2,7 @@ version: '3'
 
 networks:
   laravel:
+    enable_ipv6: false
 
 services:
   site:
@@ -10,7 +11,7 @@ services:
       dockerfile: nginx.dockerfile
     container_name: nginx
     ports:
-      - "8080:80"
+      - "9090:90"
     volumes:
       - ./src:/var/www/html:delegated
     depends_on:
@@ -24,24 +25,27 @@ services:
     image: postgres
     container_name: postgres
     restart: always
-    ports:
-      - "5544:5544"
     environment:
       POSTGRES_USER: battle
       POSTGRES_PASSWORD: moose
       POSTGRES_DB: TekkenHub
     networks:
       - laravel
+    volumes:
+      - postgres:/var/lib/postgresql/data
+      - ./postgresql/conf:/etc/postgresql/
 
   adminer:
     image: adminer
     restart: always
+    environment:
+      ADMINER_DEFAULT_DB_DRIVER: pgsql
+      ADMINER_DEFAULT_DB_HOST: postgres
+      ADMINER_DEFAULT_DB_NAME: TekkenHub
     ports:
-      - "5432:5432"
+      - "8080:8080"
     networks:
       - laravel
-    depends_on:
-      - postgres
 
   php:
     build:
