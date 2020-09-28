@@ -1,8 +1,8 @@
 version: '3'
 
-networks:
-  laravel:
-    enable_ipv6: false
+volumes:
+  postgres:
+    external: true
 
 services:
   site:
@@ -18,8 +18,6 @@ services:
       - php
       - postgres
       - adminer
-    networks:
-      - laravel
 
   postgres:
     image: postgres
@@ -29,8 +27,8 @@ services:
       POSTGRES_USER: battle
       POSTGRES_PASSWORD: moose
       POSTGRES_DB: TekkenHub
-    networks:
-      - laravel
+    ports:
+      - "5432:5432"
     volumes:
       - postgres:/var/lib/postgresql/data
       - ./postgresql/conf:/etc/postgresql/
@@ -44,8 +42,6 @@ services:
       ADMINER_DEFAULT_DB_NAME: TekkenHub
     ports:
       - "8080:8080"
-    networks:
-      - laravel
 
   php:
     build:
@@ -56,8 +52,6 @@ services:
       - ./src:/var/www/html:delegated
     ports:
       - "9000:9000"
-    networks:
-      - laravel
 
   composer:
     build:
@@ -70,8 +64,6 @@ services:
     depends_on:
       - php
     user: laravel
-    networks:
-      - laravel
     entrypoint: ['composer', '--ignore-platform-reqs']
 
   npm:
@@ -94,5 +86,3 @@ services:
     working_dir: /var/www/html
     user: laravel
     entrypoint: ['php', '/var/www/html/artisan']
-    networks:
-      - laravel
