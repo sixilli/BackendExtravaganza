@@ -4,6 +4,7 @@ volumes:
   postgres:
     external: true
 
+version: '3'
 services:
   site:
     build:
@@ -11,13 +12,12 @@ services:
       dockerfile: nginx.dockerfile
     container_name: nginx
     ports:
-      - "9090:90"
+      - "8080:80"
     volumes:
-      - ./src:/var/www/html:delegated
+      - ./src/backend:/var/www/html
     depends_on:
       - php
       - postgres
-      - adminer
 
   postgres:
     image: postgres
@@ -31,17 +31,7 @@ services:
       - "5432:5432"
     volumes:
       - postgres:/var/lib/postgresql/data
-      - ./postgresql/conf:/etc/postgresql/
-
-  adminer:
-    image: adminer
-    restart: always
-    environment:
-      ADMINER_DEFAULT_DB_DRIVER: pgsql
-      ADMINER_DEFAULT_DB_HOST: postgres
-      ADMINER_DEFAULT_DB_NAME: TekkenHub
-    ports:
-      - "8080:8080"
+      - ./docker/postgresql/conf:/etc/postgresql/
 
   php:
     build:
@@ -49,7 +39,7 @@ services:
       dockerfile: php.dockerfile
     container_name: php
     volumes:
-      - ./src:/var/www/html:delegated
+      - ./src/backend:/var/www/html
     ports:
       - "9000:9000"
 
@@ -59,18 +49,17 @@ services:
       dockerfile: composer.dockerfile
     container_name: composer
     volumes:
-      - ./src:/var/www/html
+      - ./src/backend:/var/www/html
     working_dir: /var/www/html
     depends_on:
       - php
-    user: laravel
-    entrypoint: ['composer', '--ignore-platform-reqs']
+    entrypoint: ['composer']
 
   npm:
     image: node:13.7
     container_name: npm
     volumes:
-      - ./src:/var/www/html
+      - ./src/frontend:/var/www/html
     working_dir: /var/www/html
     entrypoint: ['npm']
 
@@ -80,9 +69,8 @@ services:
       dockerfile: php.dockerfile
     container_name: artisan
     volumes:
-      - ./src:/var/www/html:delegated
+      - ./src/backend:/var/www/html
     depends_on:
       - postgres
     working_dir: /var/www/html
-    user: laravel
     entrypoint: ['php', '/var/www/html/artisan']
