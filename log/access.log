@@ -1,6 +1,0 @@
-172.18.0.1 - - [08/Oct/2020:04:24:48 +0000] "GET / HTTP/1.1" 403 135 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:81.0) Gecko/20100101 Firefox/81.0"
-172.18.0.1 - - [08/Oct/2020:04:24:48 +0000] "GET /favicon.ico HTTP/1.1" 499 0 "http://localhost/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:81.0) Gecko/20100101 Firefox/81.0"
-172.18.0.1 - - [08/Oct/2020:04:27:43 +0000] "GET /wpad.dat HTTP/1.1" 404 27 "-" "WinHttp-Autoproxy-Service/5.1"
-172.18.0.1 - - [08/Oct/2020:04:33:51 +0000] "GET / HTTP/1.1" 403 135 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:81.0) Gecko/20100101 Firefox/81.0"
-172.18.0.1 - - [08/Oct/2020:04:33:51 +0000] "GET /favicon.ico HTTP/1.1" 499 0 "http://localhost/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:81.0) Gecko/20100101 Firefox/81.0"
-172.18.0.1 - - [08/Oct/2020:04:37:44 +0000] "GET /wpad.dat HTTP/1.1" 200 42 "-" "WinHttp-Autoproxy-Service/5.1"

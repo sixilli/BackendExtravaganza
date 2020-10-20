@@ -1,76 +1,41 @@
-version: '3'
+version: "3.1"
 
 volumes:
   postgres:
     external: true
 
-version: '3'
 services:
-  site:
-    build:
-      context: .
-      dockerfile: nginx.dockerfile
-    container_name: nginx
-    ports:
-      - "8080:80"
-    volumes:
-      - ./src/backend:/var/www/html
-    depends_on:
-      - php
-      - postgres
+    postgres:
+      image: postgres
+      container_name: ${PROJECT_NAME}-postgres
+      volumes:
+        - postgres:/var/lib/postgresql/data
+      environment:
+        - POSTGRES_USER=${POSTGRES_USER}
+        - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+        - POSTGRES_DB=${POSTGRES_DB}
+      ports:
+       - "5432:5432"
 
-  postgres:
-    image: postgres
-    container_name: postgres
-    restart: always
-    environment:
-      POSTGRES_USER: battle
-      POSTGRES_PASSWORD: moose
-      POSTGRES_DB: TekkenHub
-    ports:
-      - "5432:5432"
-    volumes:
-      - postgres:/var/lib/postgresql/data
-      - ./docker/postgresql/conf:/etc/postgresql/
+    webserver:
+      image: nginx:alpine
+      container_name: ${PROJECT_NAME}-webserver
+      working_dir: /backend
+      volumes:
+          - ./backend:/backend
+          - ./docker/nginx:/etc/nginx/conf.d
+      ports:
+       - "80:80"
+      depends_on:
+        - postgres
+        - php-fpm
 
-  php:
-    build:
-      context: .
-      dockerfile: php.dockerfile
-    container_name: php
-    volumes:
-      - ./src/backend:/var/www/html
-    ports:
-      - "9000:9000"
-
-  composer:
-    build:
-      context: .
-      dockerfile: composer.dockerfile
-    container_name: composer
-    volumes:
-      - ./src/backend:/var/www/html
-    working_dir: /var/www/html
-    depends_on:
-      - php
-    entrypoint: ['composer']
-
-  npm:
-    image: node:13.7
-    container_name: npm
-    volumes:
-      - ./src/frontend:/var/www/html
-    working_dir: /var/www/html
-    entrypoint: ['npm']
-
-  artisan:
-    build:
-      context: .
-      dockerfile: php.dockerfile
-    container_name: artisan
-    volumes:
-      - ./src/backend:/var/www/html
-    depends_on:
-      - postgres
-    working_dir: /var/www/html
-    entrypoint: ['php', '/var/www/html/artisan']
+    php-fpm:
+      build: docker/php-fpm
+      container_name: ${PROJECT_NAME}-php-fpm
+      working_dir: /backend
+      volumes:
+        - ./backend:/backend
+        - ./docker/php-fpm/php-ini-overrides.ini:/etc/php/7.3/fpm/conf.d/99-overrides.ini
+      depends_on:
+        - postgres
