@@ -1,0 +1,69 @@
+@import "../node_modules/bulma/sass/utilities/_all.sass";
+$primary: #7db2b3;
+$primary-invert: findColorInvert($primary);
+
+$dark: #e0e0e0;
+$dark-invert: findColorInvert($dark);
+
+$danger: hsl(14,100%, 53%);
+$danger-invert: findColorInvert($danger);
+
+$info: hsl(204, 71%, 53%);
+$info-invert: findColorInvert($info);
+
+$purple: #f8d3d3;
+$purple-invert: findColorInvert($purple);
+
+$colors: (
+  "primary": ($primary, $primary-invert),
+  "danger": ($danger, $danger-invert),
+  "sidebar": ($dark, $dark-invert),
+  "info": ($info, $info-invert),
+  "purple": ($purple, $purple-invert),
+);
+
+$link: $info;
+$link-invert: $info-invert;
+$link-focus-border: $info;
+
+$sidebar-box-shadow: none;
+$modal-background-background-color: #111111;
+
+.navbar {
+    margin-bottom: 2rem;
+    padding-left: 5rem;
+}
+
+.navbar .has-shadow {
+    box-shadow: 0 .125rem .25rem rgba(0,0,0,.075);
+}
+
+.router-link-exact-active.router-link-active {
+  background-color: whitesmoke;
+}
+
+.dash {
+  display: flex;
+  width: 100%;
+  min-height: 100vh;
+}
+
+.content {
+  flex-grow: 1;
+  min-width: 50%;
+}
+
+.sidebar-layout {
+  display: flex;
+  min-height: 100%;
+}
+
+.section-steps {
+  margin-bottom: 1rem;
+}
+
+.step-navigation {
+  text-align: center;
+}
+
+@import "../node_modules/bulma/bulma.sass";
