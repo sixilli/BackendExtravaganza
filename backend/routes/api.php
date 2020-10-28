@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Models\Tournament;
+use App\Http\Controllers\TournamentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,23 +17,7 @@ use App\Models\Tournament;
 */
 
 // Tournament Endpoints
-Route::get('/tournaments', function () {
-    $tournament = Tournament::create([
-        'title' => 'Tekken World Tour!',
-        'description' => 'King of the iron fist tournament',
-        'attendees' => 64,
-        'region' => 'NA lul',
-        'location' => 'Los Angeles, California',
-        'link' => 'TekkenHub.com',
-        'start_time' => Carbon\Carbon::now()
-    ]);
-
-    return $tournament;
-});
-
-Route::get('/tournament/results/$id', function () {
-    return ['message' => 'hello'];
-});
+Route::apiResource('/tournaments', TournamentController::class);
 
 // Players
 Route::get('/players', function () {

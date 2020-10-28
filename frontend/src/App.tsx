@@ -4,7 +4,9 @@ import './index.css';
 import { HashRouter as Router, Route, Link, Switch } from 'react-router-dom'
 import { Home } from './views/home';
 import { News } from './views/news';
+import { Frames } from './views/frames';
 import { Tournaments } from './views/tournaments';
+import { Resources } from './views/resources';
 import { Players } from './views/players';
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 import { orange, blue } from '@material-ui/core/colors';
@@ -16,6 +18,23 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 
 const theme = createMuiTheme({
+  overrides: {
+    MuiContainer: {
+      maxWidthXl: {
+        maxWidth: '80%',
+        width: '80%',
+        minWidth: '80%',
+      }
+    },
+    MuiTableCell: {
+      head: {
+        width: '10%'
+      },
+      body: {
+        width: '10%'
+      }
+    }
+  },
   palette: {
     type: 'dark',
     primary: {
@@ -25,16 +44,16 @@ const theme = createMuiTheme({
       main: blue[500],
     },
     //error: {
-      //main: j,
+      //main: blue[500],
     //},
     //warning: {
-      //main: jasmine,
+      //main: blue[500],
     //},
     //info: {
-      //main: jasmine,
+      //main: blue[500],
     //},
     //warning: {
-      //main: jasmine,
+      //main: blue[500],
     //},
   },
 });
@@ -48,10 +67,12 @@ function App() {
             <Toolbar>
               <Typography variant="h3">TekkenHub</Typography>
               <Container>
-                <Box py={4}>
+                <Box my={4}>
                   <Button size="large" component={Link} to={"/"}>Home</Button>
+                  <Button size="large" component={Link} to={"/frames"}>Frames</Button>
                   <Button size="large" component={Link} to={"/news"}>News</Button>
                   <Button size="large" component={Link} to={"/players"}>Players</Button>
+                  <Button size="large" component={Link} to={"/resources"}>Resources</Button>
                   <Button size="large" component={Link} to={"/tournaments"}>Tournaments</Button>
                 </Box>
               </Container>
@@ -61,7 +82,9 @@ function App() {
             <Route exact path="/" component={Home} />
             <Route exact path="/news" component={News} />
             <Route exact path="/tournaments" component={Tournaments} />
+            <Route exact path="/frames" component={Frames} />
             <Route exact path="/players" component={Players} />
+            <Route exact path="/resources" component={Resources} />
           </Switch>
         </Box>
       </Router>

@@ -13,6 +13,10 @@
   color: #61dafb;
 }
 
+html {
+  width: 100vw;
+}
+
 body {
   background-color: #181818;
   color: whitesmoke;
