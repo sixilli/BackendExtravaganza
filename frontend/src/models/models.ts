@@ -19,5 +19,6 @@ export interface tournamentModel {
     'region': string,
     'location': string,
     'link': string,
-    'start_time': string,
+    'startTime': string,
+    'streamLink': string,
 };

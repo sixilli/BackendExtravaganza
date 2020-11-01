@@ -1,6 +1,5 @@
 import React from 'react';
 import { createStyles, lighten, makeStyles, Theme } from '@material-ui/core/styles';
-import Autocomplete from '@material-ui/lab/Autocomplete';
 import Button from '@material-ui/core/Button';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -10,10 +9,10 @@ import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
-import TextField from '@material-ui/core/TextField';
 import Toolbar from '@material-ui/core/Toolbar';
 import Paper from '@material-ui/core/Paper';
 import { frameDataModel } from '../models/models';
+import { CharacterSelectDropdown} from './characterSelectDropdown';
 
 function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
     if (b[orderBy] < a[orderBy]) {
@@ -139,17 +138,10 @@ const EnhancedTableToolbar = (props: EnhancedTableToolbarProps) => {
     const classes = useToolbarStyles();
     return (
         <Toolbar className={classes.container}>
-            <Autocomplete
-                id="combo-box-demo"
-                options={props.characters.sort()}
-                //getOptionLabel={(option) => option.title}
-                style={{ width: 300 }}
-                renderInput={(params) => <TextField {...params} label="Character" variant="outlined" />}
-                onChange={(event: any, newValue: string | null) => {
-                    if (newValue) {
-                        props.changeCharacter(newValue);
-                    }
-                }}
+            <CharacterSelectDropdown
+                character={props.character}
+                characters={props.characters}
+                changeCharacter={props.changeCharacter}
             />
             <div className={classes.spacer} />
             <Button variant="outlined" onClick={props.defaultSort} color="primary">Default Sort</Button>
