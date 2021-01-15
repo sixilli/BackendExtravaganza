@@ -1,0 +1,5 @@
+{
+    "storage": {
+        "pgsql_connection": "host=postgres user=battle password=moose dbname=TekkenHub sslmode=disable"
+    }
+}

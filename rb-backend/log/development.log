@@ -1,0 +1,24 @@
+Started GET "/api/blog" for ::1 at 2021-01-10 18:25:49 -0600
+  
+ActionController::RoutingError (uninitialized constant Api::BlogController
+Did you mean?  Api::BlogsController):
+  
+Started GET "/api/blog" for ::1 at 2021-01-10 18:27:37 -0600
+  
+ActionController::RoutingError (No route matches [GET] "/api/blog"):
+  
+Started GET "/api/blogs" for ::1 at 2021-01-10 18:27:46 -0600
+Processing by Api::BlogsController#index as JSON
+  Parameters: {"blog"=>{}}
+  [1m[36mBlog Load (1.5ms)[0m  [1m[34mSELECT "blogs".* FROM "blogs"[0m
+  ↳ app/controllers/api/blogs_controller.rb:4:in `index'
+Completed 500 Internal Server Error in 85ms (ActiveRecord: 3.3ms | Allocations: 5680)
+
+
+  
+ActiveRecord::StatementInvalid (PG::UndefinedTable: ERROR:  relation "blogs" does not exist
+LINE 1: SELECT "blogs".* FROM "blogs"
+                              ^
+):
+  
+app/controllers/api/blogs_controller.rb:4:in `index'

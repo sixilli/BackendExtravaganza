@@ -1,41 +1,43 @@
 version: "3.1"
 
 volumes:
-  postgres:
-    external: true
+    postgres:
+        external: true
 
 services:
     postgres:
-      image: postgres
-      container_name: ${PROJECT_NAME}-postgres
-      volumes:
-        - postgres:/var/lib/postgresql/data
-      environment:
-        - POSTGRES_USER=${POSTGRES_USER}
-        - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-        - POSTGRES_DB=${POSTGRES_DB}
-      ports:
-       - "5432:5432"
-
-    webserver:
-      image: nginx:alpine
-      container_name: ${PROJECT_NAME}-webserver
-      working_dir: /backend
-      volumes:
-          - ./backend:/backend
-          - ./docker/nginx:/etc/nginx/conf.d
-      ports:
-       - "80:80"
-      depends_on:
-        - postgres
-        - php-fpm
-
-    php-fpm:
-      build: docker/php-fpm
-      container_name: ${PROJECT_NAME}-php-fpm
-      working_dir: /backend
-      volumes:
-        - ./backend:/backend
-        - ./docker/php-fpm/php-ini-overrides.ini:/etc/php/7.3/fpm/conf.d/99-overrides.ini
-      depends_on:
-        - postgres
+        image: postgres:alpine
+        volumes:
+          - postgres:/var/lib/postgresql/data
+        environment:
+          - POSTGRES_USER=${POSTGRES_USER}
+          - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+          - POSTGRES_DB=${POSTGRES_DB}
+        ports:
+         - "5432:5432"
+    go_api:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        working_dir: /go/src/github.com/sixilli/TekkenHub
+        volumes:
+            - ./go-backend:/go/src/github.com/sixilli/TekkenHub
+            - ./go-backend/api:/go/src/github.com/sixilli/TekkenHub/api
+            - ./go-backend/storage:/go/src/github.com/sixilli/TekkenHub/storage
+        ports:
+            - "12082:12082"
+        environment:
+            - PORT=12082
+        depends_on:
+            - postgres
+    elixir_api:
+        build:
+            context: ./ex-backend
+            dockerfile: Dockerfile
+        working_dir: /elixir/src
+        volumes:
+            - ./ex-backend/src:/elixir/src
+        ports:
+            - "12082:12082"
+        depends_on:
+            - postgres

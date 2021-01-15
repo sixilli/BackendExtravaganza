@@ -1,0 +1,15 @@
+# Add your own tasks in files placed in lib/tasks ending in .rake,
+# for example lib/tasks/capistrano.rake, and they will automatically be available to Rake.
+
+require_relative "config/application"
+
+Rails.application.load_tasks
+
+# Disabling DB migrations for testing multiple backends
+Rake::Task.tasks.each do |t|
+    if t.name.start_with?("db:migrate")
+        t.clear
+        t.add_description("!!! Disabled for testing multiple backends, db:schema:load is allowed !!!")
+        t.actions << proc { puts "Migrations ignored."}
+    end
+end

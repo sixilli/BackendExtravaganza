@@ -34,13 +34,20 @@ export const TournamentCard = ({id,
     attendees,
     region,
     location,
-    link,
+    eventLink,
     startTime,
     streamLink }: tournamentModel) => {
+
     const classes = useStyles();
-    const linkHandler = (link: string) => {
-        window.open(link)
-    }
+
+    const linkHandler = (link: string, event: React.MouseEvent<HTMLElement>) => {
+        if (link.charAt(0) !== 'h') {
+            link = 'https://' + link;
+        };
+
+        event.preventDefault();
+        window.open(link);
+    };
 
     return (
         <div>
@@ -67,8 +74,8 @@ export const TournamentCard = ({id,
                         </Typography>
                     </CardContent>
                     <CardActions>
-                        <Button size="small" color="primary" onClick={() => linkHandler(link)}>Event Information</Button>
-                        <Button size="small" color="secondary" onClick={() => linkHandler(streamLink)}>Stream</Button>
+                        <Button size="small" color="primary" onClick={(e) => linkHandler(eventLink, e)}>Event Information</Button>
+                        <Button size="small" color="secondary" onClick={(e) => linkHandler('twitch.tv', e)}>Stream</Button>
                     </CardActions>
                 </Card>
             </Box>

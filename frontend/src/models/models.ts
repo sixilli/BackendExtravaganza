@@ -18,7 +18,7 @@ export interface tournamentModel {
     'attendees': number,
     'region': string,
     'location': string,
-    'link': string,
+    'eventLink': string,
     'startTime': string,
     'streamLink': string,
 };

@@ -1,0 +1,3 @@
+﻿{
+  "PgConnectionString":  "host=localhost;database=TekkenHub;user id=battle;password=moose"
+}
