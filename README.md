@@ -1,5 +1,5 @@
 # Backend Extravaganza
-Fun way to test out a bunch of backends and work on my docker skills. Currently using postgres in a docker container. Ideally all backend will be dockerized, but currently only Elixir and Golang are running in containers.
+Decided to create a bunch of rest API's in various languages to see if I have a clear favorite. Currently using postgres in a docker container. Ideally all the backends will be dockerized, but currently only Elixir and Golang are running in containers. As things stand currently Golang and Spring Boot are the winners.
 
 ### Golang Echo SQL - Done
 ### Java Spring Boot ORM - Done
