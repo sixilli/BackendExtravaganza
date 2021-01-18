@@ -23,7 +23,14 @@ defmodule SrcWeb.Router do
     pipe_through :api
 
     get "/blogs", BlogController, :index
+    post "/blogs", BlogController, :create
+    get "/blogs/:id", BlogController, :show
+    patch "/blogs/:id", BlogController, :update
+
     get "/tournaments", TournamentController, :index
+    post "/tournaments", TournamentController, :create
+    get "/tournaments/:id", TournamentController, :show
+    patch "/tournaments/:id", TournamentController, :update
   end
 
   # Other scopes may use custom stacks.

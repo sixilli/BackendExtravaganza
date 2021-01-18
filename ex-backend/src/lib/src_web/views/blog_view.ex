@@ -1,11 +1,16 @@
 defmodule SrcWeb.BlogView do
   use SrcWeb, :view
+  alias SrcWeb.BlogView
 
   def render("index.json", %{blogs: blogs}) do
-    Enum.map(blogs, &blog_json/1)
+    render_many(blogs, BlogView, "blog.json")
   end
 
-  def blog_json(blog) do
+  def render("show.json", %{blog: blog}) do
+    render_one(blog, BlogView, "blog.json")
+  end
+
+  def render("blog.json", %{blog: blog}) do
     %{
         id: blog.id,
         author: blog.author,
