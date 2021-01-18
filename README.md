@@ -1,4 +1,4 @@
-# docker-laravel-postgres-nginx
+# Backend Extravaganza
 Fun way to test out a bunch of backends and work on my docker skills. Currently using postgres in a docker container. Ideally all backend will be dockerized, but currently only Elixir and Golang are running in containers.
 
 ### Golang Echo SQL - Done
