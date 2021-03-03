@@ -1,0 +1,5 @@
+[0m[[0m[0mdebug[0m] [0m[0mCopy resource mappings: [0m
+[0m[[0m[0mdebug[0m] [0m[0m	(G:\projects\php\TekkenHub\test-back\conf\application.conf,G:\projects\php\TekkenHub\test-back\target\scala-2.13\classes\application.conf)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	(G:\projects\php\TekkenHub\test-back\conf\logback.xml,G:\projects\php\TekkenHub\test-back\target\scala-2.13\classes\logback.xml)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	(G:\projects\php\TekkenHub\test-back\conf\messages,G:\projects\php\TekkenHub\test-back\target\scala-2.13\classes\messages)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	(G:\projects\php\TekkenHub\test-back\conf\routes,G:\projects\php\TekkenHub\test-back\target\scala-2.13\classes\routes)[0m

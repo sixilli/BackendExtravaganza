@@ -7,4 +7,5 @@ Decided to create a bunch of rest API's in various languages to see if I have a 
 ### PHP Laravel ORM - Done
 ### Elixir Phoenix ORM - In Progress
 ### Ruby Rails ORM - On hold
+### Scala Play Framework ScalikeJDBC
 Rails might have a way around my issues but as things are the naming scheme doesn't line up with what rails wants.

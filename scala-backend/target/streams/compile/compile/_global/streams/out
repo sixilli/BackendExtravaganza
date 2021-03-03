@@ -1,0 +1,7 @@
+[0m[[0m[31merror[0m] [0m[0mG:\projects\php\TekkenHub\test-back\app\api\tournament\TournamentController.scala:9:12: object github is not a member of package com[0m
+[0m[[0m[31merror[0m] [0m[0mimport com.github.tototoshi.play.json.JsonNaming[0m
+[0m[[0m[31merror[0m] [0m[0m           ^[0m
+[0m[[0m[31merror[0m] [0m[0mG:\projects\php\TekkenHub\test-back\app\api\tournament\TournamentController.scala:19:35: not found: value JsonNaming[0m
+[0m[[0m[31merror[0m] [0m[0m  implicit val tournamentFormat = JsonNaming.snakecase(Json.format[TournamentResource])[0m
+[0m[[0m[31merror[0m] [0m[0m                                  ^[0m
+[0m[[0m[31merror[0m] [0m[0mtwo errors found[0m
