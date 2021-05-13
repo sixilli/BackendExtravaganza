@@ -1,0 +1,27 @@
+[package]
+name = "rust-backend"
+version = "0.1.0"
+authors = ["Alec <alecperro@gmail.com>"]
+edition = "2018"
+
+[target.x86_64-unknown-linux-gnu]
+linker = "x86_64-linux-gnu-gcc"
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+rocket = "0.4.7"
+serde = "1.0.123"
+serde_derive = "1.0.123"
+serde_json = "1.0.62"
+log = "0.4.14"
+diesel = { version = "1.4.4", features = ["postgres", "chrono"] }
+dotenv =  "0.15.0"
+
+[dependencies.rocket_contrib]
+version = "0.4.7"
+default-features = false
+features = ["diesel_postgres_pool", "json"]
+
+[dependencies.chrono]
+version = "0.4.19"
+features = ["serde"]

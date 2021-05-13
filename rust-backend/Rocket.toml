@@ -1,0 +1,6 @@
+[development]
+port = 12086
+
+[global.databases]
+postgres_database = { url = "postgres://battle:moose@localhost/TekkenHub" }
+
